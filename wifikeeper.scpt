@@ -13,7 +13,7 @@ repeat
 		end if
 	end try
 	try
-		if (do shell script "networksetup -getinfo Wi-Fi | grep -c 'IP address:'") = "1" then
+		if ((do shell script "networksetup -getinfo Wi-Fi | grep -c 'IP address:'") = "1") or ((do shell script "networksetup -getairportnetwork en1 | grep -c 'You are not associated'") = "1") then
 			log (log (current date) & "wifi network off detected.")
 			do shell script "networksetup -setairportnetwork en1 SSID PASSWORD"
 			log "wifi reconnected."
